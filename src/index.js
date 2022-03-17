@@ -3,9 +3,88 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 import { Card } from 'reactstrap';
 import ReactDOM from 'react-dom';
+import ExampleNavegacion from './examplenavegacion';
 
+const varia = "Perro";
+class Timer extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { seconds: 0 };
+    }
+
+    tick() {
+        this.setState(state => ({ seconds: state.seconds + 1 }));
+
+    }
+
+    componentDidMount() {
+        this.interval =
+            setInterval(() => this.tick(), 1000);
+
+    }
+
+    render() {
+        return ( <
+            div >
+            Segundos: { this.state.seconds } <
+            /div>
+        );
+    }
+
+}
+
+class HelloMessage extends React.Component {
+
+    render() {
+        return ( <
+            div >
+            Hola { this.props.name } <
+            br / >
+            Me siento { this.props.estadoAnimo } { varia } <
+            /div>
+        );
+    }
+}
+
+function Avatar(props) {
+    return ( <
+        img className = "Avatar"
+        src = { props.user.avatarUrl }
+        alt = { props.user.name }
+        />
+    );
+}
+
+function UserInfo(props) {
+    return ( <
+        div className = "UserInfo" >
+        <
+        Avatar user = { props.user }
+        /> <
+        div className = "UserInfo-name" > { props.user.name } <
+        /div> < /
+        div >
+    );
+}
+
+function Comment(props) {
+    return ( <
+        div className = "Comment" >
+        <
+        UserInfo user = { props.author }
+        /> <
+        div className = "Comment-text" > { props.text } <
+        /div> <
+        div className = "Comment-date" > { props.date } <
+        /div> < /
+        div >
+    );
+}
 
 class TodoApp extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = { items: [], text: '' };
@@ -15,6 +94,7 @@ class TodoApp extends React.Component {
 
     }
 
+
     render() {
         return ( <
             Card body color = "info"
@@ -23,22 +103,21 @@ class TodoApp extends React.Component {
             <
             div >
             <
-            h3 > Tareas pendientes < /h3> <
+            h3 > Tareas pendientes < /h3>  <
             TodoList items = { this.state.items }
-            /> <
+            />  <
             form onSubmit = { this.handleSubmit } >
             <
             input id = "new-todo"
             onChange = { this.handleChange }
             value = { this.state.text }
-            placeholder = "¿Qué Desea Ingresar?" /
-            >
+            placeholder = "¿Qué Desea Ingresar?" / >
             <
             Button outline color = "primary" >
             Añadir# { this.state.items.length + 1 } <
-            /Button> < /
+            /Button>  < /
             form > <
-            /div> < /
+            /div>  < /
             Card >
         );
     }
@@ -80,11 +159,7 @@ class TodoList extends React.Component {
 }
 
 ReactDOM.render( <
-    React.StrictMode >
-    <
-    TodoApp / >
-    <
-    /React.StrictMode>,
+    ExampleNavegacion / > ,
     document.getElementById('root')
 );
 
